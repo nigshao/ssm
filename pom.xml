@@ -10,6 +10,8 @@
   <properties>
   		<!-- <spring.version>4.3.10.RELEASE</spring.version>   -->
   		<spring.version>3.2.2.RELEASE</spring.version> 
+  		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  		<env>dev</env>
   </properties>
   <dependencies>
     <dependency>
@@ -103,11 +105,6 @@
    	<version>1.7.25</version>
    </dependency>
    <dependency>
-   	<groupId>org.slf4j</groupId>
-   	<artifactId>slf4j-log4j12</artifactId>
-   	<version>1.7.25</version>
-   </dependency>
-   <dependency>
    	<groupId>org.codehaus.jackson</groupId>
    	<artifactId>jackson-mapper-asl</artifactId>
    	<version>1.9.13</version>
@@ -121,7 +118,6 @@
    	<groupId>commons-io</groupId>
    	<artifactId>commons-io</artifactId>
    	<version>2.5</version>
-   	<type>pom.lastUpdated</type>
    </dependency>
    <dependency>
    	<groupId>commons-codec</groupId>
@@ -154,8 +150,101 @@
    	<artifactId>spring-test</artifactId>
    	<version>4.3.10.RELEASE</version>
    </dependency>
+    <!-- <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>jcl-over-slf4j</artifactId>
+         <version>1.5.8</version>
+      </dependency>
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-api</artifactId>
+         <version>1.5.8</version>
+      </dependency> -->
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-log4j12</artifactId>
+         <version>1.5.8</version>
+      </dependency>
+      <dependency>
+         <groupId>log4j</groupId>
+         <artifactId>log4j</artifactId>
+         <version>1.2.14</version>
+      </dependency>
+      <dependency>
+      	<groupId>commons-httpclient</groupId>
+      	<artifactId>commons-httpclient</artifactId>
+      	<version>3.1</version>
+      </dependency>
+      <dependency>
+      	<groupId>org.apache.httpcomponents</groupId>
+      	<artifactId>httpmime</artifactId>
+      	<version>4.5.2</version>
+      </dependency>
+      <dependency>
+      	<groupId>org.apache.httpcomponents</groupId>
+      	<artifactId>httpcomponents-client</artifactId>
+      	<version>4.5.2</version>
+      	<type>pom</type>
+      </dependency>
+      <dependency>
+      	<groupId>commons-configuration</groupId>
+      	<artifactId>commons-configuration</artifactId>
+      	<version>1.10</version>
+      </dependency>
   </dependencies>
+ 
   <build>
     <finalName>ssm</finalName>
+    <filters>
+  		<filter>src/main/filters/filter-${env}.properties</filter>
+  	</filters>
+  	<resources>
+  		<resource>
+  			<directory>src/main/resources</directory>
+  			<filtering>true</filtering>
+  		</resource>
+  	</resources>
+  	<plugins>
+		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>2.3.2</version>  
+		    <configuration>  
+		        <source>1.7</source>  
+		        <target>1.7</target>  
+		        <encoding>utf8</encoding>
+		        <compilerArguments>  
+		            <verbose />  
+		            <bootclasspath>${java.home}/lib/rt.jar</bootclasspath>  
+		        </compilerArguments>    
+		    </configuration>
+  		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-war-plugin</artifactId>
+			<configuration>
+				<warName>ssm</warName>
+			</configuration>
+		</plugin>
+	</plugins>
   </build>
+   <!-- 配置动态的打包环境 -->
+  <profiles>
+  		<profile>
+  			<id>dev</id>
+  			 <properties>  
+                <environment>dev</environment><!-- 节点名字environment是自己随意取的   -->
+            </properties>  
+            <activation>  
+                <activeByDefault>true</activeByDefault><!-- 默认激活该profile节点   -->
+            </activation> 
+  		</profile>
+  		 <profile>  
+           <!--  测试环境   -->
+            <id>pre</id>  
+            <properties>  
+                <environment>pre</environment>  
+            </properties>  
+        </profile> 
+  </profiles>
 </project>

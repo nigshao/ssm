@@ -5,13 +5,7 @@ import java.util.Date;
 
 
 public class User implements Serializable {
-	public String getParentMobileNum() {
-		return parentMobileNum;
-	}
-
-	public void setParentMobileNum(String parentMobileNum) {
-		this.parentMobileNum = parentMobileNum;
-	}
+	
 
     private Long id;
 
@@ -66,15 +60,13 @@ public class User implements Serializable {
     private Date createTime;
     private Date updateTime;
     
-    //会员
+    //浼氬憳
     private String level;
     private Date memberBeginTime;
     private Date memberEndTime;
     
-    //用户上传的产品数量
-    private Integer itemCount;
-    //下载二维码图片
-    private String downloadLink;
+    //鐢ㄦ埛涓婁紶鐨勪骇鍝佹暟閲�    private Integer itemCount;
+    //涓嬭浇浜岀淮鐮佸浘鐗�    private String downloadLink;
     
     private String companyInfo;
     
@@ -88,33 +80,14 @@ public class User implements Serializable {
     
     private String regionName1;
     /**
-     * 交易次数
+     * 浜ゆ槗娆℃暟
      */
     private int  totalTrade;
     /**
-     * 剩余点击次数
+     * 鍓╀綑鐐瑰嚮娆℃暟
      */
     private long lestNum=0;
-    //易物师姓名
-    private String parentName;
-    //易物师真实姓名
-    private String parentRealName;
     
-    public String getParentName() {
-		return parentName;
-	}
-
-	public void setParentName(String parentName) {
-		this.parentName = parentName;
-	}
-
-	public String getParentRealName() {
-		return parentRealName;
-	}
-
-	public void setParentRealName(String parentRealName) {
-		this.parentRealName = parentRealName;
-	}
 
 	public int getTotalTrade() {
 		return totalTrade;
@@ -156,14 +129,6 @@ public class User implements Serializable {
 		this.regionName1 = regionName1;
 	}
 
-	public String getDownloadLink() {
-		return downloadLink;
-	}
-
-	public void setDownloadLink(String downloadLink) {
-		this.downloadLink = downloadLink;
-	}
-
 	private String qq;
     
     private String email;
@@ -177,8 +142,6 @@ public class User implements Serializable {
     public Integer gender;
     
     public String userGender;
-    //易物师傅的电话
-    public String parentMobileNum;
     
     public String getQrcodeUrl() {
 		return qrcodeUrl;
@@ -343,13 +306,6 @@ public class User implements Serializable {
         this.updateTime = updateTime;
     }
 
-	public Integer getItemCount() {
-		return itemCount;
-	}
-
-	public void setItemCount(Integer itemCount) {
-		this.itemCount = itemCount;
-	}
 
 	public String getQq() {
 		return qq;

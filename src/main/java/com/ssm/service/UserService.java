@@ -1,7 +1,8 @@
 package com.ssm.service;
 
 import com.ssm.domain.User;
+import com.ssm.domain.VZyUserInfo;
 
 public interface UserService {
-	public User findByUserId(String userId);
+	public VZyUserInfo findByUserId(long userId);
 }

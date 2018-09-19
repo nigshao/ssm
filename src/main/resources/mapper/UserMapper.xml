@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.base.UserMapper">
+
+	<select id="getUserById" resultType="com.ssm.domain.VZyUserInfo">
+		SELECT id, nickname as nickName, account, password, password2, mail ,mobile, sex as sex, head_portrait as headPortrait, score as score, province_id as provinceId,
+			 city_id as cityId, county_id as countyId, school_id as schoolId, grade_id as gradeId,register_time as registerTime,
+			real_name as realName,status as status,device_type as deviceType,friend_type as friendType,register_type AS registerType,
+			union_id as unionId,new_user_id as userId FROM user WHERE id=#{userId};
+	</select>
+
+	<select id="getUserList" resultType="com.ssm.domain.VZyUserInfo"
+		parameterType="java.util.List">
+		SELECT id, nickname as nickName, sex as sex, head_portrait as headPortrait, score as score, province_id as provinceId,
+			 city_id as cityId, county_id as countyId, school_id as schoolId, grade_id as gradeId,register_time as registerTime,
+			real_name as realName,status as status,device_type as deviceType,friend_type as friendType,register_type AS registerType,
+			union_id as unionId,new_user_id as userId FROM user WHERE id in 
+			<foreach collection="listIds" item="id" open="(" close=")" separator=",">
+			#{id}
+			</foreach>
+	</select>
+    
+    <update id="deleteUserById" parameterType="java.lang.Long">
+        UPDATE user SET status = -1000
+        <where>
+            id=#{id} and (register_type=0 or register_type=2)
+        </where>
+    </update>
+    
+    <delete id="deleteUserByAccount" parameterType="java.lang.String">
+     	DELETE FROM user WHERE  account=#{account} and register_type=3
+    </delete>
+     
+    <delete id="deleteUserByUnionId" parameterType="java.lang.String">
+     	DELETE FROM user WHERE union_id=#{unionId} and register_type=1
+    </delete>
+          
+    <update id="bindMobile" parameterType="java.lang.String">
+        UPDATE user SET mobile = #{mobile}
+        <where>
+            id=#{id} and (mobile is null or mobile = '')
+        </where>
+    </update>
+    
+    <update id="changeBindMobile" parameterType="java.lang.String">
+        UPDATE user SET mobile = #{newMobile}
+        <where>
+            id=#{id} and mobile=#{mobile}
+        </where>
+    </update>
+	
+</mapper>

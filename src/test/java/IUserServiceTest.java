@@ -8,9 +8,8 @@ public class IUserServiceTest {
 
     public static void main(String[] args) {
         ApplicationContext application = new ClassPathXmlApplicationContext("applicationContext.xml");
-        UserService uService = (UserService) application.getBean("UserService");
-        User user = uService.findByUserId("944560");
-        System.out.println(user.getName());
+        UserService userService = (UserService) application.getBean("userService");
+        userService.findByUserId(944560L);
     }
- 
+    
 }

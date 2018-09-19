@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.base.GameMapper">
+	<select id="getAllGame" resultType="com.ssm.domain.VZyGame">
+		select id, developId, spId, name, type, descs,gameUrl,rankUrl ,appSecretKey
+		  from g_game 
+		order by sortNum asc
+    </select>
+</mapper>
